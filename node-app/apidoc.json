@@ -1,0 +1,18 @@
+{
+    "name": "Queue Publisher",
+    "version": "1.0.0",
+    "description": "Queue Publisher Api Documentation",
+    "title": "Queue Publisher Api Documentation",
+    "url": "https://queque.publisher.com/<version>",
+    "header": {
+        "title": "GETTING STARTED",
+        "filename": "apidoc-getting-started.md"
+    },
+    "template": {
+        "withCompare": true,
+        "withGenerator": true
+    },
+    "order": [
+        "TOKEN"
+    ]
+}

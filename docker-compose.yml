@@ -1,0 +1,22 @@
+version: '3.2'
+
+services:
+    node:
+        image: queuepub
+        restart: always
+        build:
+            context: ./
+            dockerfile: ./node.docker
+        container_name: queuepubnode
+        ports:
+            - "8081:8081"
+        volumes:
+            - ./node-app:/application
+        env_file: ./node-app/app.env
+        command: ["bash", "start.sh"]
+        networks:
+            - app-network
+
+networks:
+  app-network:
+    driver: bridge
