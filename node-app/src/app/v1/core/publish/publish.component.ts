@@ -63,12 +63,14 @@ export class Publish extends CoreMiddleware {
                     }
 
                     logsId = (queue['_id']).toString();
+
+                    data['logId'] = logsId;
                     return this.rabbit.publish(req.rabbitMq, data['type'], data);
                 }
             )
             .then(
                 (rabbitData) => {
-                    if (this.helper.isEmptyObject(rabbitData) || this.helper.isEmpty(logsId)) {
+                    if (this.helper.isEmpty(rabbitData) || this.helper.isEmpty(logsId)) {
                         return Promise.reject('error publish');
                     }
 
