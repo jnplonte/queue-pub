@@ -23,12 +23,11 @@ export class Publish extends CoreMiddleware {
      * @apiDescription publish data
      *
      * @apiParam (body) {String} type type <br/>Ex. [logJobs, recieveJobs, confirmJobs]
-     * @apiParam (body) {String} action publishing action <br/>Ex. [submit, recieved, pending, completed]
      * @apiParam (body) {Object} data publishing data
      * @apiParam (body) {String} [message] publishing message
      */
     post(req: Request, res: Response): void {
-        const reqParameters = ['type', 'action', 'data'];
+        const reqParameters = ['type', 'data'];
         if (!this.helper.validateData(req.body, reqParameters)) {
             return this.response.failed(res, 'data', reqParameters);
         }

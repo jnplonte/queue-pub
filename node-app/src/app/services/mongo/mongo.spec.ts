@@ -11,7 +11,7 @@ describe('mongo service', () => {
     const getfinalData = function(data) {
         data = (typeof(data.get) !== 'undefined') ? data.get({ plain: true}) : data;
 
-        const finalData: Object = {'data': data.data || [], 'pagination': data.pagination || {}};
+        const finalData: Object = {'data': data.data || []};
 
         return finalData['data'];
     };

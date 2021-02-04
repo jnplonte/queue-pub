@@ -11,7 +11,6 @@ describe('publish component', () => {
             .set('Authorization', `Bearer ${authKey}`)
             .send({
                 'type': 'logJobs',
-                'action': 'submit',
                 'data': {
                     'abc': 'def'
                 },
