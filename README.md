@@ -6,12 +6,12 @@
 **v1.0.0**
 
 
-### Dependencies
+## Dependencies
 * nodejs: [https://nodejs.org/](https://nodejs.org/en/)
-* expressjs: [https://expressjs.com/](https://expressjs.com/)
-* mongodb: [https://www.mongodb.com/](https://www.mongodb.com/)
 * rabbitmq: [https://www.rabbitmq.com/](https://www.rabbitmq.com/)
 * docker: [https://www.docker.com/](https://www.docker.com/)
+* expressjs: [https://expressjs.com/](https://expressjs.com/)
+* mongodb: [https://www.mongodb.com/](https://www.mongodb.com/)
 
 
 ## NODE
