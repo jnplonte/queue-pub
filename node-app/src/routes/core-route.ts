@@ -13,6 +13,9 @@ export function setup(app, config, rabbitMq, mongoModels) {
         appCore.use((req, res, next) => {
             res.startTime = new Date().getTime();
 
+            const bearerHeader = req.headers['authorization'].split(' ');
+            req.token = (bearerHeader[1]) ? bearerHeader[1] : '';
+
             if (typeof(req.authentication) === 'undefined' || helper.isEmpty(req.authentication.id)) {
                 return response.failed(res, 'token', '', 401);
             }

@@ -8,7 +8,7 @@ export class Rabbit {
         this.helper = new Helper(this.config);
     }
 
-    publish(mq, type: string = '', data: Object = {}) {
+    publish(mq, token: string = '', type: string = '', data: Object = {}) {
         type = this.helper.isNotEmpty(type) ? type : this.config.logQueueName;
 
         data['createdAt'] = new Date();
@@ -26,6 +26,7 @@ export class Rabbit {
                                 return channel.sendToQueue(type, Buffer.from(JSON.stringify(data)), {
                                     persistent: true,
                                     headers: {
+                                        'token': token,
                                         [this.config.secretKey]: this.config.secretKeyHash
                                     }
                                 });

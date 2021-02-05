@@ -18,6 +18,7 @@ declare global {
     namespace Express {
         interface Request {
             'authentication': { 'id'?: string, 'name'?: string};
+            'token'?: string;
             'rabbitMq'?: any;
             'mongoModels'?: any;
         }
