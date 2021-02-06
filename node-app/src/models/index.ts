@@ -3,6 +3,7 @@ import * as mongoose from 'mongoose';
 import { baseConfig } from './../config';
 
 import { queueLogsModel } from './queue-logs';
+import { couponsModel } from './coupons';
 
 const databaseInstance: Array<any> = [];
 
@@ -36,7 +37,8 @@ export function mongoSetup() {
     }
 
     const db = {
-        queueLogs: queueLogsModel(mongoose)
+        queueLogs: queueLogsModel(mongoose),
+        coupons: couponsModel(mongoose)
     };
 
     databaseInstance['mongo'] = db;

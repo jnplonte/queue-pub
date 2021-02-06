@@ -5,6 +5,7 @@ import { Mongo } from '../app/services/mongo/mongo.service';
 
 import { Publish } from '../app/v1/core/publish/publish.component';
 import { QueueLogs } from '../app/v1/core/queue-logs/queue-logs.component';
+import { Coupons } from '../app/v1/core/coupons/coupons.component';
 
 export function setup(app, config, rabbitMq, mongoModels) {
     const response = new ApiResponse(), helper = new Helper(config), rabbit = new Rabbit(config), mongo = new Mongo(config);
@@ -32,6 +33,7 @@ export function setup(app, config, rabbitMq, mongoModels) {
 
         new Publish(appCore, response, helper, rabbit, mongo);
         new QueueLogs(appCore, response, helper, mongo);
+        new Coupons(appCore, response, helper, mongo);
     });
 
     return app;

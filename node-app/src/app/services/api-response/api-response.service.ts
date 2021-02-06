@@ -51,8 +51,8 @@ export class ApiResponse {
                 message = 'Permission Denied';
             break;
 
-            case 'login-failed':
-                message = 'Invalid Username or Password';
+            case 'invalid-status-failed':
+                message = 'invalid status';
             break;
 
             default:
@@ -61,27 +61,27 @@ export class ApiResponse {
         return message;
     }
 
-    getError(method: string = ''): string {
-        let message: string = '';
+    getError(method: string = '', errorList: any = null): string[] {
+        const message: string[] = [];
 
         switch (method) {
-            case 'ConstraintError':
             case 'DatabaseError':
-                message = 'Database Error';
+                message.push('error.database');
             break;
 
             case 'NetworkingError':
             case 'ConnectionError':
-                message = 'Network Error';
+                message.push('error.network');
             break;
 
             default:
-                message = method;
+                message.push(`error.${method}`);
         }
+
         return message;
     }
 
-    success(res: Response, param: string, data: any = '', status: number = 200): any {
+    success(res: Response, param: string, data: any = '', pagination: Object = {}, status: number = 200): any {
         const resData = {
             'status': 'success',
             'message': this.getMessage(`${param}-success`),
@@ -89,17 +89,21 @@ export class ApiResponse {
             'data': data
         };
 
+        if (pagination && Object.keys(pagination).length !== 0 && pagination.constructor === Object) {
+            resData['pagination'] = pagination || {};
+        }
+
         return (res.status) ? res.status(status || 200).json(resData) : resData;
     }
 
     failed(res: Response, param: string, data: any = '', error: number = 400): any {
+        const errorData: any = (data.name || data.code) ? this.getError(data.name || data.code, data || null) : (typeof(data) === 'string') ? [data.replace(/ /g, '.').toLowerCase()] : data;
         const resData = {
             'status': 'failed',
             'message': this.getMessage(`${param}-failed`),
             'executionTime': (res.startTime) ? ((new Date().getTime()) - res.startTime) / 1000 : 0,
-            'data': (this.env === 'production') ? this.getError(data.name || data.code) : data
+            'data': (errorData.length === 1 && errorData[0] === '') ? [] : errorData
         };
-
         return (res.status) ? res.status(error || 400).json(resData) : resData;
     }
 }

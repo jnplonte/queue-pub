@@ -22,14 +22,13 @@ describe('api response service', () => {
         expect(services.getMessage('data-failed')).to.equal('Missing Parameters');
         expect(services.getMessage('token-failed')).to.equal('Invalid Authentication Token');
         expect(services.getMessage('model-failed')).to.equal('Internal Server Error');
-        expect(services.getMessage('login-failed')).to.equal('Invalid Username or Password');
 
         done();
     });
 
     it('should get the error message', (done) => {
-        expect(services.getError('DatabaseError')).to.equal('Database Error');
-        expect(services.getError('NetworkingError')).to.equal('Network Error');
+        expect(services.getError('DatabaseError')).to.eql(['error.database']);
+        expect(services.getError('NetworkingError')).to.eql(['error.network']);
 
         done();
     });
@@ -37,6 +36,7 @@ describe('api response service', () => {
     it('should get the success payload', (done) => {
         expect(services.success({}, 'post', 'test-data').status).to.equal('success');
         expect(services.success({}, 'put', 'test-data', {'count': 1}).status).to.equal('success');
+        expect(services.success({}, 'get', 'test-data', {'count': 1}).pagination).to.eql({'count': 1});
 
         done();
     });

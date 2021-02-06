@@ -11,7 +11,7 @@ describe('mongo service', () => {
     const getfinalData = function(data) {
         data = (typeof(data.get) !== 'undefined') ? data.get({ plain: true}) : data;
 
-        const finalData: Object = {'data': data.data || []};
+        const finalData: Object = {'data': data.data || [], 'pagination': data.pagination || {}};
 
         return finalData['data'];
     };
@@ -40,7 +40,7 @@ describe('mongo service', () => {
     });
 
     it('should mock get all data', (done) => {
-        services.getAllField(models.queueLogs, {})
+        services.getAll(models.queueLogs, {})
             .then(
                 (data) => {
                     expect(getfinalData(data)).to.be.a('Array');
@@ -52,7 +52,7 @@ describe('mongo service', () => {
     });
 
     it('should get one data', (done) => {
-        services.getOne(models.queueLogs, { '_id': '5f98e9c6a9a10067865ddb9f' })
+        services.getOne(models.queueLogs, { '_id': '5f03fe387223487e3e3f8b92' })
             .then(
                 (data) => {
                     expect(data).to.be.a('Object');
@@ -61,5 +61,11 @@ describe('mongo service', () => {
                 }
             )
             .catch(done);
+    });
+
+    it('should get the mongo request', (done) => {
+        expect(services.appendRequestQuery({}, 'ENName:LTL|TCName:XXX')).to.have.eql({ 'ENName': /LTL/i, 'TCName': /XXX/i });
+
+        done();
     });
 });
