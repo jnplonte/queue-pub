@@ -1,24 +1,20 @@
 {
-  "local": {
-    "host": "http://localhost",
-    "port" : 8081,
-    "endpoints": {
-
-    },
-    "defaults": {
-
-    }
-  },
-  "development": {
-    "host": "",
-    "port": 8082,
-    "endpoints": {},
-    "defaults": {}
-  },
-  "production": {
-    "host": "",
-    "port": 8082,
-    "endpoints": {},
-    "defaults": {}
-  }
+	"local": {
+		"host": "http://localhost",
+		"port": 8081,
+		"endpoints": {},
+		"defaults": {}
+	},
+	"development": {
+		"host": "http://localhost",
+		"port": 8081,
+		"endpoints": {},
+		"defaults": {}
+	},
+	"production": {
+		"host": "",
+		"port": 8081,
+		"endpoints": {},
+		"defaults": {}
+	}
 }
