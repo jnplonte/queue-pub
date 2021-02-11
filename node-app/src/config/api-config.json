@@ -6,7 +6,7 @@
 		"defaults": {}
 	},
 	"development": {
-		"host": "http://localhost",
+		"host": "http://138.68.62.198",
 		"port": 8081,
 		"endpoints": {},
 		"defaults": {}
